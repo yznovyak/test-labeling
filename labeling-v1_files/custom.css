@@ -1,0 +1,159 @@
+body {
+    padding-top: 20px;
+}
+
+.test-word-container {
+    text-align: center;
+    padding: 0px;
+}
+
+.test-word-container .word {
+    margin: 0;
+    font-size: 80px;
+    text-align: center;
+}
+
+.microphone-input {
+    margin: auto;
+    width: 300px;
+}
+
+.microphone-input .outer-div {
+    width: 300px;
+    height: 300px;
+    text-align: center;
+    vertical-align: middle;
+    display: table-cell;
+}
+
+.microphone-input .inner-div {
+    display: inline-block;
+}
+
+.microphone-input .outer-circle {
+    position: relative;
+    width: 250px;
+    height: 250px;
+    border-radius: 100%;
+    /*background: #bbb;*/
+    margin: 0 auto;
+    text-align: center;
+    vertical-align: middle;
+    display: table-cell;
+}
+
+.microphone-input .volume-level-circle {
+    width: 150px;
+    height: 150px;
+    border-radius: 100%;
+    background: #aaa;
+    text-align: center;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.microphone-input .recording-indicator-circle {
+    position: absolute;
+    margin: auto;
+    display: inline-block;
+    z-index: 0;
+    background-color: #aaa;
+    animation: pulse 1.5s infinite ease-in-out;
+    -webkit-animation: pulse 1.5s infinite ease-in-out;
+    width: 150px;
+    height: 150px;
+    border-radius: 100%;
+    text-align: center;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+@keyframes pulse {
+    from {
+        left: 50px;
+        top: 50px;
+        width: 150px;
+        height: 150px;
+        opacity: 0.7;
+    }
+    to {
+        left: 0;
+        top: 0;
+        width: 250px;
+        height: 250px;
+        opacity: 0.1;
+    }
+}
+
+.microphone-input .microphone-img-div {
+    margin: auto;
+    position: absolute;
+    left: 50px;
+    top: 50px;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: #777;
+    text-align: center;
+    vertical-align: middle;
+    display: inline-block;
+    /*border: 1px solid red;*/
+}
+
+.microphone-submit {
+    text-align: center;
+    width: 100px;
+    margin: auto;
+}
+
+.testing-container-footnote {
+    width: 100%;
+    text-align: center;
+    font-size: x-small;
+    color: #666;
+}
+
+.spinner2 {
+    display: inline-block;
+    border-radius: 50%;
+    content: '';
+    width: 20px;
+    height: 20px;
+    position: relative;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-left-color: #ccc;
+    -webkit-animation: spinner2_kf 0.6s infinite linear;
+    animation: spinner2_kf 0.6s infinite linear;
+}
+@-webkit-keyframes spinner2_kf {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+@keyframes spinner2_kf {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+.no-gutter {
+    margin-bottom: 0;
+}
+
+#final-score {
+    font-size: 60px;
+}
+
+#results-table {
+    /*table-layout: fixed;*/
+}

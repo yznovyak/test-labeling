@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Dataset Labelling</title>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://www.robus.io/static/css/custom.css">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+        <style>
+         @media (min-width: 1200px) {
+             .text-right-lg {
+                 text-align: right;
+             }
+         }
+
+         .my-checkbox-inline {
+             display: inline-block;
+             margin-right: 10px;
+         }
+        </style>
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">Запис <b>{{.utt.id}}</b> користувача <b>{{.utt.uid2}}</b> ({{.utt.gender}}, {{.utt.age}})</div>
+                        <div class="panel-body">
+                            <form id="labelling-form" class="form-horizontal" action="./post" method="POST">
+                                <input type="hidden" name="UttId" value="{{.utt.id}}">
+
+                                <div class="form-group">
+                                    <div class="text-center">
+                                        <audio id="utterance" src="https://www.robus.io/admin/uploads/utterances-mp3{{.utt.file_path}}.mp3" type="audio/mpeg" autoplay controls>
+                                            audio didn't work
+                                        </audio>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-lg-3 text-right-lg">
+                                        <label>Якість запису</label>
+                                    </div>
+                                    <div class="col-lg-9">
+                                        <label class="radio-inline" data-toggle="tooltip" data-container="body" title="Взагалі нічого не розібрати">
+                                            <input type="radio" name="RecordingQuality" id="RecordingQuality_Radio1" value="1"> 1
+                                        </label>
+                                        <label class="radio-inline" data-toggle="tooltip" data-container="body" title="Треба дуже вслуховуватись">
+                                            <input type="radio" name="RecordingQuality" id="RecordingQuality_Radio2" value="2"> 2
+                                        </label>
+                                        <label class="radio-inline" data-toggle="tooltip" data-container="body" title="Треба вслуховуватись">
+                                            <input type="radio" name="RecordingQuality" id="RecordingQuality_Radio3" value="3"> 3
+                                        </label>
+                                        <label class="radio-inline" data-toggle="tooltip" data-container="body" title="Незначні шуми">
+                                            <input type="radio" name="RecordingQuality" id="RecordingQuality_Radio4" value="4"> 4
+                                        </label>
+                                        <label class="radio-inline" data-toggle="tooltip" data-container="body" title="Взгалі без шумів">
+                                            <input type="radio" name="RecordingQuality" id="RecordingQuality_Radio5" value="5"> 5
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-lg-3 text-right-lg">
+                                        <label>Правильність вимови <span class="badge">{{.utt.cue}}</span></label>
+                                    </div>
+                                    <div class="col-lg-9">
+                                        <label class="radio-inline" data-toggle="tooltip" data-container="body" title="Дуже погана">
+                                            <input type="radio" name="PronunciationQuality" id="PronunciationQuality_Radio1" value="1"> 1
+                                        </label>
+                                        <label class="radio-inline" data-toggle="tooltip" data-container="body" title="Погана">
+                                            <input type="radio" name="PronunciationQuality" id="PronunciationQuality_Radio2" value="2"> 2
+                                        </label>
+                                        <label class="radio-inline" data-toggle="tooltip" data-container="body" title="Добра">
+                                            <input type="radio" name="PronunciationQuality" id="PronunciationQuality_Radio3" value="3"> 3
+                                        </label>
+                                        <label class="radio-inline" data-toggle="tooltip" data-container="body" title="Дуже хороша">
+                                            <input type="radio" name="PronunciationQuality" id="PronunciationQuality_Radio4" value="4"> 4
+                                        </label>
+                                        <label class="radio-inline" data-toggle="tooltip" data-container="body" title="Ідеальна">
+                                            <input type="radio" name="PronunciationQuality" id="PronunciationQuality_Radio5" value="5"> 5
+                                        </label>
+                                        <div class="checkbox">
+                                            <label class="radio-inline">
+                                                <input type="radio" name="PronunciationQuality" id="PronunciationQuality_RadioNA" value="-1"> неможливо оцінити
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-lg-3 text-right-lg">
+                                        <label>Якась типова помилка вимови?</label>
+                                    </div>
+                                    <div class="col-lg-9">
+                                        <div>
+                                            <div class="checkbox my-checkbox-inline">
+                                                <label>
+                                                    <input type="checkbox" name="Mistakes" value="z_instead_of_theta">
+                                                    /z/ замість /θ/
+                                                </label>
+                                            </div>
+                                            <div class="checkbox my-checkbox-inline">
+                                                <label>
+                                                    <input type="checkbox" name="Mistakes" value="s_instead_of_theta">
+                                                    /s/ замість /θ/
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="checkbox my-checkbox-inline">
+                                                <label>
+                                                    <input type="checkbox" name="Mistakes" value="z_instead_of_eth">
+                                                    /z/ замість /ð/
+                                                </label>
+                                            </div>
+                                            <div class="checkbox my-checkbox-inline">
+                                                <label>
+                                                    <input type="checkbox" name="Mistakes" value="s_instead_of_eth">
+                                                    /s/ замість /ð/
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="Mistakes" value="other_not_in_th">
+                                                Помилка не в ⟨th⟩ (/θ/ або /ð/ звучать ок)
+                                            </label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="Mistakes" value="other">
+                                                Типова, але жодна з перелічених раніше
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-lg-3 text-right-lg">
+                                        <label for="comment">Коментар</label>
+                                    </div>
+                                    <div class="col-lg-9">
+                                        <input id="utt_comment" class="form-control" type="text" name="Comment" placeholder="Необов'язковий комментар" data-toggle="dropdown">
+                                        <ul id="utt_past_comments" class="dropdown-menu" role="menu" aria-labelledby="utt_comment">
+                                            {{range .comments}}
+                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">{{.}}</a></li>
+                                            {{end}}
+                                            <!-- <li role="presentation"><a role="menuitem" tabindex="-1" href="#">HTML</a></li>
+                                                 <li role="presentation"><a role="menuitem" tabindex="-1" href="#">CSS</a></li>
+                                                 <li role="presentation"><a role="menuitem" tabindex="-1" href="#">JavaScript</a></li> -->
+                                        </ul>
+
+                                    </div>
+                                    <!-- <div class="col-xs-3 text-right">
+                                         <label for="comment">Коментар</label>
+                                         </div>
+                                         <div class="col-xs-9">
+                                         <input class="form-control" type="text" name="Comment" placeholder="Необов'язковий комментар">
+                                         </div> -->
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-lg-9 col-lg-offset-3">
+                                        <label>
+                                            <input type="checkbox" name="IsBookmarked" value="1">
+                                            Помітити запис, щоб його легше було знайти пізніше
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group text-center no-gutter">
+                                    <button id="Button_submit" type="submit" class="btn btn-primary">Відправити</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+         function on_form_submit(event) {
+             form_fields = $(this).serializeArray().map(x => x.name);
+             console.log(form_fields);
+             if (!form_fields.includes('PronunciationQuality') ||
+                 !form_fields.includes('RecordingQuality')) {
+                 alert('Необхідно оцінити і якість запису і вимови');
+                 event.preventDefault();
+             }
+         }
+
+         function on_prev_comment_click(event) {
+             clicked_text = $(this).text();
+             current_text = $('#utt_comment').val();
+             new_text = (current_text + " " + clicked_text).trim();
+             $('#utt_comment').val(new_text);
+         }
+
+         $(document).ready(function() {
+             $('[data-toggle="tooltip"]').tooltip(); // enable tooltips
+
+             $('#labelling-form').submit(on_form_submit);
+             $('#utt_past_comments li a').click(on_prev_comment_click);
+         })
+        </script>
+    </body>
+</html>

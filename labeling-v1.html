@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<!-- saved from url=(0045)https://www.robus.io/api/_labelling/kate/this -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>Dataset Labelling</title>
+
+    <link rel="stylesheet" href="./labeling-v1_files/bootstrap.min.css">
+    <link rel="stylesheet" href="./labeling-v1_files/custom.css">
+
+    <script src="./labeling-v1_files/jquery.min.js"></script>
+    <script src="./labeling-v1_files/bootstrap.min.js"></script>
+  </head>
+
+  <body>
+    <div class="container">
+      <div id="welcome-container" class="row">
+        <div class="col-lg-6 col-lg-offset-3">
+          <div class="panel panel-info">
+            <div class="panel-heading">Запис №<b>16479</b> — this</div>
+            <div class="panel-body">
+              <form id="labelling-form" class="form-horizontal" action="https://www.robus.io/api/_labelling/kate/this#" method="POST">
+                <div class="form-group">
+                  <div class="text-center">
+                    <audio controls="">
+                      <source src="/static/uploads/utterances//run10/batch11/22320-pvyi" type="audio/mpeg">
+                    </audio>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-xs-3 text-right">
+                    <label for="comment">Якість звуку</label>
+                  </div>
+                  <div class="col-xs-9">
+                    <label class="radio-inline">
+                      <input type="radio" name="recording_quality" id="recording_quality_Radio1" value="1"> poor
+                    </label>
+                    <label class="radio-inline">
+                      <input type="radio" name="recording_quality" id="recording_quality_Radio2" value="2"> fair
+                    </label>
+                    <label class="radio-inline">
+                      <input type="radio" name="recording_quality" id="recording_quality_Radio3" value="3"> good
+                    </label>
+                    <label class="radio-inline">
+                      <input type="radio" name="recording_quality" id="recording_quality_Radio4" value="4"> very good
+                    </label>
+                    <label class="radio-inline">
+                      <input type="radio" name="recording_quality" id="recording_quality_Radio5" value="5"> excellent
+                    </label>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-xs-3 text-right">
+                    <label for="comment">Правильність вимови /th/</label>
+                  </div>
+                  <div class="col-xs-9">
+                    <label class="radio-inline">
+                      <input type="radio" name="pronunciation_quality" id="pronunciation_quality_Radio1" value="1"> poor
+                    </label>
+                    <label class="radio-inline">
+                      <input type="radio" name="pronunciation_quality" id="pronunciation_quality_Radio2" value="2"> fair
+                    </label>
+                    <label class="radio-inline">
+                      <input type="radio" name="pronunciation_quality" id="pronunciation_quality_Radio3" value="3"> good
+                    </label>
+                    <label class="radio-inline">
+                      <input type="radio" name="pronunciation_quality" id="pronunciation_quality_Radio4" value="4"> very good
+                    </label>
+                    <label class="radio-inline">
+                      <input type="radio" name="pronunciation_quality" id="pronunciation_quality_Radio5" value="5"> excellent
+                    </label>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-xs-3 text-right">
+                    <label for="comment">Якась типова помилка?</label>
+                  </div>
+                  <div class="col-xs-9">
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox" name="mistake_z_instead_of_th">
+                        /z/ замість /th/
+                      </label>
+                    </div>
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox" name="mistake_s_instead_of_th">
+                        /s/ замість /th/
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-xs-3 text-right">
+                    <label for="comment">Коментар</label>
+                  </div>
+                  <div class="col-xs-9">
+                    <textarea class="form-control" rows="2" name="comment"></textarea>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-xs-9 col-xs-offset-3">
+                    <label>
+                      <input type="checkbox" name="bookmark">
+                      Зберегти запис в закладки
+                    </label>
+                  </div>
+                </div>
+                <div class="form-group text-center no-gutter">
+                  <button id="Button_submit" type="submit" class="btn btn-primary">Відправити</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function on_form_submit(event) {
+        form_fields = $(this).serializeArray().map(x => x.name);
+        console.log(form_fields);
+        if (!form_fields.includes('pronunciation_quality') ||
+            !form_fields.includes('recording_quality')) {
+                event.preventDefault();
+        }
+      }
+
+      $(document).ready(function() {
+        $('#labelling-form').submit(on_form_submit);
+      })
+    </script>
+  
+
+</body></html>

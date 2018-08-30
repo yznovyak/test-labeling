@@ -1,0 +1,19 @@
+You take data from: https://www.robus.io/api/labeling/get_task
+
+An example output:
+
+{
+    "TaskId": 1,
+    "UttId": 11,
+    "Path": "/run10/batch2/5707-jw3r",
+    "Cue": "this",
+    "SpeakerIdHash": "hash1",
+    "SpeakerGender": "Male",
+    "SpeakerAge": "30",
+    "LabelerLastComments": [
+        "comment1",
+        "comment2"
+    ]
+}
+
+You should post form response to https://www.robus.io/api/labeling/post_label
