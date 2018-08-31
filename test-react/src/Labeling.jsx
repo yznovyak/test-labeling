@@ -3,6 +3,52 @@ import ReactDOM from "react-dom";
 
 import styles from "./Labeling.scss";
 
+class DropdownItem extends React.Component {
+    constructor(props) {
+        super(props);
+        this.handleClick = this.handleClick.bind(this);
+    }
+
+    handleClick() {
+        this.props.callback(this.props.value);
+    }
+
+    render() {
+        return (
+            <li role="presentation">
+                <a role="dropdown-item" onClick={this.handleClick}>{this.props.value}</a>
+            </li>);
+    }
+}
+
+class CommentsInput extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {value: ""};
+        this.handleDropdownChoice = this.handleDropdownChoice.bind(this);
+    }
+
+    handleDropdownChoice(dropdownValue) {
+        this.setState({value: dropdownValue});
+    }
+
+    render() {
+        let items = this.props.prevComments.map((comment, ind) =>
+            <DropdownItem key={ind} value={comment} callback={this.handleDropdownChoice}/>
+        );
+
+        return (
+            <div>
+                <input className="form-control" type="text" name="Comment"
+                       autoComplete="off" value={this.state.value}
+                       placeholder="Необов'язковий комментар" data-toggle="dropdown" />
+                <ul className="dropdown-menu" role="menu">
+                    {items}
+                </ul>
+            </div>);
+    }
+}
+
 class LabelingApp extends React.Component {
     constructor(props) {
         super(props);
@@ -163,13 +209,7 @@ class LabelingApp extends React.Component {
                                             <label htmlFor="comment">Коментар</label>
                                         </div>
                                         <div className="col-lg-9">
-                                            <input id="utt_comment" className="form-control" type="text" name="Comment"
-                                                   placeholder="Необов'язковий комментар" data-toggle="dropdown" />
-                                            <ul className="dropdown-menu" role="menu">
-                                                <li role="presentation"><a role="menuitem">Коментар 1</a></li>
-                                                <li role="presentation"><a role="menuitem">Коментар 2</a></li>
-                                                <li role="presentation"><a role="menuitem">Коментар 3</a></li>
-                                            </ul>
+                                            <CommentsInput prevComments={this.state.LabelerLastComments}/>
                                         </div>
                                     </div>
 
@@ -199,5 +239,3 @@ ReactDOM.render(
     <LabelingApp/>,
     document.getElementById('app')
 );
-
-console.log(styles);
